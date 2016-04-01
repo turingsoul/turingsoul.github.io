@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			#poly1{
+				position: absolute;
+				top: 200px;
+			stroke:black;
+			stroke-width:30px;
+			fill:none;
+			
+		}	
+		#poly2{
+				position: absolute;
+				top: 200px;
+				left:100px;
+			stroke:red;
+			stroke-width:30px;
+			fill:none;
+			
+		}	
+		#svg1{
+			position: absolute;
+			left:50%;
+			top:200px;
+			width:800px;
+			height:800px;
+			margin-left: -400px;
+		}
+		#svg2{
+			position: absolute;
+			left:50%;
+			top:195px;
+			width:800px;
+			height:800px;
+			margin-left: -405px;
+		}
+		.love{
+			fill:white;
+			font-family: "microsoft yahei";
+			font-size: 40px;
+			z-index: 100000;
+			
+		}
+		</style>
+		
+	</head>
+	<body>
+		
+		<svg id="svg1">
+		
+		</svg>
+		<svg id="svg2">
+		
+		</svg>
+		<script src="js/d3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		var polyline =d3.select("#svg1").append("polyline").attr("id","poly1");
+		var polyline2 =d3.select("#svg2").append("polyline").attr("id","poly2");
+		var mystring = "";
+		var mystring2 = "";
+		var interval = 42;
+		var scale = 150;
+		var xmove = 100;
+		var ymove = 0;
+		for(var i=0;i<2000;i++){
+			
+			var x = Math.random()*800;
+			var y = Math.random()*800;
+			/*first*/
+			if((Math.pow(x-scale,2)+Math.pow(y-scale,2))<Math.pow(scale,2)){
+				mystring = mystring + (x+xmove)+","+y+" ";
+				polyline = polyline.attr("points",mystring)
+			                   .transition()
+			                   .duration(interval);
+				mystring = mystring+(scale*2+xmove)+","+scale+" ";
+				polyline = polyline.attr("points",mystring)
+			                   .transition()
+			                   .duration(interval);
+			                   
+			
+			}else if((Math.pow(x-scale*3,2)+Math.pow(y-scale,2))<Math.pow(scale,2)){
+				mystring = mystring + (x+xmove)+","+y+" ";
+				polyline = polyline.attr("points",mystring)
+			                   .transition()
+			                   .duration(interval);
+				mystring = mystring+(scale*2+xmove)+","+scale+" ";
+				polyline = polyline.attr("points",mystring)
+			                   .transition()
+			                   .duration(interval);
+			}else if((Math.pow(x-scale*2,2)+Math.pow(y-scale,2))<Math.pow(scale*2,2)&&(y-scale>0)){
+				mystring = mystring + (x+xmove)+","+y+" ";
+				polyline = polyline.attr("points",mystring)
+			                   .transition()
+			                   .duration(interval);
+				mystring = mystring+(scale*2+xmove)+","+scale+" ";
+				polyline = polyline.attr("points",mystring)
+			                   .transition()
+			                   .duration(interval);
+			}
+			/*second*/
+			if((Math.pow(x-scale,2)+Math.pow(y-scale,2))<Math.pow(scale,2)){
+				mystring2 = mystring2 + (x+xmove)+","+y+" ";
+				polyline2 = polyline2.attr("points",mystring2)
+			                   .transition()
+			                   .duration(interval);
+				mystring2 = mystring2+(scale*2+xmove)+","+scale+" ";
+				polyline2 = polyline2.attr("points",mystring2)
+			                   .transition()
+			                   .duration(interval);
+			                   
+			
+			}else if((Math.pow(x-scale*3,2)+Math.pow(y-scale,2))<Math.pow(scale,2)){
+				mystring2 = mystring2 + (x+xmove)+","+y+" ";
+				polyline2 = polyline2.attr("points",mystring2)
+			                   .transition()
+			                   .duration(interval);
+				mystring2 = mystring2+(scale*2+xmove)+","+scale+" ";
+				polyline2 = polyline2.attr("points",mystring2)
+			                   .transition()
+			                   .duration(interval);
+			}else if((Math.pow(x-scale*2,2)+Math.pow(y-scale,2))<Math.pow(scale*2,2)&&(y-scale>0)){
+				mystring2 = mystring2 + (x+xmove)+","+y+" ";
+				polyline2 = polyline2.attr("points",mystring2)
+			                   .transition()
+			                   .duration(interval);
+				mystring2 = mystring2+(scale*2+xmove)+","+scale+" ";
+				polyline2 = polyline2.attr("points",mystring2)
+			                   .transition()
+			                   .duration(interval);
+			}
+			
+			
+		}
+		
+		d3.select("#svg2").append("text")
+		          .text("Love you")
+		          .attr("class","love")
+		          .attr("x","320")
+		          .attr("y","200")
+		          .attr("textLength","160");
+		          
+			  
+		</script>
+	</body>
+</html>
