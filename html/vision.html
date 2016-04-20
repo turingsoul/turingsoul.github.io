@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/vision_large.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/jquery.selectlist.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/vision_md.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/vision_normal.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/vision_sm.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/vision_xm.css"/>
+		
+	</head>
+	<body>
+		<!--用来纵向拉伸屏幕用-->
+		
+		<div id="mytool"></div>
+		<table id="five">
+			<!--标题-->
+			<tr>
+				<td colspan="4" id="headline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现金流&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>	
+			</tr>
+			<tr>
+				<td id="displaycashflow"></td>
+				<td id="displaytotal"></td>
+				<td id="displaypassive"></td>
+			</tr>
+			<tr></tr>
+			<tr>
+				<td id="displayone">&nbsp;收入：23987123&nbsp;&nbsp;</td>
+				<td id="displaytwo">&nbsp;支出：198740&nbsp;&nbsp;</td>
+				<td id="displaythird">&nbsp;资产：289374234&nbsp;&nbsp;</td>
+				<td id="displayfourth">&nbsp;负债：800&nbsp;&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<table id="copyfirst">
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>	
+					</table>
+					
+				</td>
+				<td>
+					<table id="copysecond">
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>	
+					</table>
+					
+				</td>
+				<td>
+					<table id="copythird">
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+						<tr><td>1111111103</td><td>003</td></tr>
+					</table>
+					
+				</td>
+				<td>
+					<table id="copyfourth">
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>
+						<tr><td>003</td><td>003</td></tr>		
+					</table>
+					
+				</td>
+			</tr>
+		
+		</table>
+		<!--导出报表-->
+		<a id="downloadchart" 
+			download="个人理财表.xls"
+		    href="#"
+		    id="exportFourTable"
+		    onclick="return ExcellentExport.excel(this, 'five', 'five');">
+		        导出报表</a>
+		<!--增加消费-->
+		<a  id="addConsume" onclick="addConsume();">新增消费</a>
+		<!--新增收入-->
+		<a  id="addMoney" onclick="addMoney();">新增收入</a>
+		
+		<!--显示屏-->
+		<!--新增消费面板-->
+		<div id="addConsumeBoard">
+			<input type="text" class = "input_addinput" id="consume_add1" placeholder="消费项"/>
+			<input type="text" class = "input_addinput" id="consume_add2" placeholder="金额"/>
+			<div id="consumeTips"></div>
+			<select name="" id="consumeSelector">
+				
+			</select>
+			<div id="consumeCheck" class="btnInput">确定</div>
+			<div id="consumeCancel" class="btnInput">取消</div>
+		</div>
+		<!--流水账显示-->
+		<div id="showTablePanel">
+			<table id="flowTable">
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>	
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>				
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>				
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+				</tr>				
+				
+			</table>
+			
+		</div>
+		<div id="clickToggle">查看流水账</div>
+		<div id="caption">
+			<font id="bigCaption"></font>
+			<font class="cashflow" id="cashflow1">0</font>
+			<font class="cashflow" id="cashflow2">0</font>
+			<font class="cashflow" id="cashflow3">0</font>
+			<font  id="pointer2" class="pointer">,</font>
+			<font class="cashflow" id="cashflow4">1</font>
+			<font class="cashflow" id="cashflow5">0</font>
+			<font class="cashflow" id="cashflow6">1</font>
+			<font  id="pointer1" class="pointer">.</font>
+			<font class="cashflow" id="cashflow7">0</font>
+			<font class="cashflow" id="cashflow8">1</font>
+			<font id="totalAsset">总金额:</font>
+			<font id="sumCash">34981.938</font>
+			<font id="passiveCashFlow">被动月收入：</font>
+			<font id = "passiveCash"></font>
+		</div>
+		<div id="changbg"></div>  <!--换肤拉杆-->
+		<!--收入面板-->
+		<h4 id="inputListCaption">月收入<br><font>INPUTLIST<font></h4>
+		<h4 id="inputSum"></h4>
+		<div id="inputPlus">添加</div>
+		<div id="inputBoard">
+			<table id="first">
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+			</table>
+		</div>
+		<!--添加收入面板-->
+		<div id="addInput">
+			<input type="text" class = "input_addinput" id="input_add1" placeholder="项目" />
+			<input type="text" class = "input_addinput" id="input_add2" placeholder="金额"/>
+			<div id="addTips"></div>
+			<select id="select_input">
+				 <option value ="1">工资</option>
+				 <option value ="2">利息</option>
+				 <option value ="3">股息</option>
+				 <option value ="4">劳务报酬</option>
+				 <option value ="5">生意</option>
+				 <option value ="6">住房补贴</option>
+				 <option value ="7">单位缴公积金</option>
+				 <option value ="8">补贴</option>
+				 <option value ="9">房产租金</option>
+				 <option value ="10">知识产权</option>
+				 <option value ="11">退休金</option>
+				 <option value ="12">网络收入</option>
+				 <option value ="13">其他</option>
+			</select>
+			<div id="btnInputUpdate" class="btnInput">确认修改</div>
+			<div id="btnInputSummit" class="btnInput">确定</div>
+			<div id="btnInputCancel" class="btnInput">取消</div>
+		</div>
+		
+		<!--支出面板-->
+			<h4 id="outputListCaption">月支出<br><font>OUTPUTLIST</font></h4>
+			<h4 id = "outputSum"></h4>	
+			<div id="outputPlus">添加</div>
+			<div id="outputBoard">
+			<table id="second">
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+			</table>
+		</div>
+		<!--添加支出面板-->
+			<div id="addOutput">
+				<input type="text" class = "output_addoutput" id="output_add1" placeholder="项目" />
+				<input type="text" class = "output_addoutput" id="output_add2" placeholder="金额"/>
+				<div id="outputTips"></div>
+				<select id="select_output">
+					 <option value ="1">衣服</option>
+					 <option value ="2">饮食</option>
+					 <option value ="3">住宿</option>
+					 <option value ="4">交通</option>
+					 <option value ="5">娱乐</option>
+					 <option value ="6">文化</option>
+					 <option value ="7">生活用品</option>
+					 <option value ="8">水电</option>
+					 <option value ="9">赡养</option>
+					 <option value ="10">贷款</option>
+				</select>
+				<div id="btnOutputUpdate" class="btnInput">确认修改</div>
+				<div id="btnOutputSummit" class="btnInput">确定</div>
+				<div id="btnOutputCancel" class="btnInput">取消</div>
+			</div>
+			
+		<!--资产面板-->
+		    <h4 id="assetListCaption">个人资产<br><font>ASSETLIST</font></h4>
+			<h4 id = "assetSum"></h4>	
+			<div id="assetPlus">添加</div>
+			<div id="assetBoard">
+			<table id="third">
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+			</table>
+		</div>
+		<!--添加资产面板-->
+			<div id="addAsset">
+				<input type="text" class = "asset_addasset" id="asset_add1" placeholder="项目" />
+				<input type="text" class = "asset_addasset" id="asset_add2" placeholder="金额"/>
+				<div id="assetTips"></div>
+				<select id="select_asset">
+					 <option value ="1">存款</option>
+					 <option value ="2">股票</option>
+					 <option value ="3">房产</option>
+					 <option value ="4">汽车</option>
+					 <option value ="5">债券</option>
+					 <option value ="6">期权</option>
+					
+				</select>
+				<div id="btnAssetUpdate" class="btnAsset">确认修改</div>
+				<div id="btnAssetSummit" class="btnAsset">确定</div>
+				<div id="btnAssetCancel" class="btnAsset">取消</div>
+			</div>
+			
+	    <!--负债面板-->
+			<h4 id="debtListCaption">个人负债<br><font>DEBTLIST</font></h4>
+			<h4 id = "debtSum"></h4>	
+			<div id="debtPlus">添加</div>
+			<div id="debtBoard">
+			<table id="forth">
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>	
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+				<tr><td>003</td><td>003</td></tr>
+			</table>
+			</div>
+		<!--添加负债面板-->
+			<div id="addDebt">
+				<input type="text" class = "debt_adddebt" id="debt_add1" placeholder="项目" />
+				<input type="text" class = "debt_adddebt" id="debt_add2" placeholder="金额"/>
+				<div id="debtTips"></div>
+				<select id="select_debt">
+					 <option value ="1">欠债</option>
+					 <option value ="2">贷款</option>
+					
+				</select>
+				<div id="btnDebtUpdate" class="btnDebt">确认修改</div>
+				<div id="btnDebtSummit" class="btnDebt">确定</div>
+				<div id="btnDebtCancel" class="btnDebt">取消</div>
+			</div>
+			<!--显示收支比例-->
+			
+			<svg id="fillgauge" width="19%" height="200");"></svg>
+			<div id="fillgaugeTip">
+				收支比例
+			</div>
+			<!--显示资产-->
+			<div id="mybox">
+				<svg id="investPercent" width="200px" height="200px"></svg>
+				<div id="investTips">
+					资产比例
+				</div>
+			</div>
+			<!--应急能力-->
+			<svg id="fillgauge6" width="19%" height="200");"></svg>
+			<div id="fillgauge6Tip">
+				应急能力
+			</div>
+		
+		<!--应急能力-->
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/changebkg.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/calculate.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/addInput.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery.selectlist.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/initDatabase.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/addOutput.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/addAsset.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/addDebt.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/d3.v3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/liquidFillGauge.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/fillgauge.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/cakeChart.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/Donut3D.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/export.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/excellentexport.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/flowacount.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/html5.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/respond.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#select_input').selectlist({
+					zIndex: 11,
+					width: 400,
+					height: 30,
+					showMaxHeight:250,
+					triangleSize: 6,   //右侧小三角大小
+           			triangleColor: '#cd992f'  //右侧小三角颜色
+				});
+				$('#select_output').selectlist({
+					zIndex: 11,
+					width: 400,
+					height: 30,
+					showMaxHeight:250,
+					triangleSize: 6,   //右侧小三角大小
+           			triangleColor: '#cd992f'  //右侧小三角颜色
+				});
+				$('#select_asset').selectlist({
+					zIndex: 11,
+					width: 400,
+					height: 30,
+					showMaxHeight:250,
+					triangleSize: 6,   //右侧小三角大小
+           			triangleColor: '#cd992f'  //右侧小三角颜色
+				});
+				$('#select_debt').selectlist({
+					zIndex: 11,
+					width: 400,
+					height: 30,
+					showMaxHeight:250,
+					triangleSize: 6,   //右侧小三角大小
+           			triangleColor: '#cd992f'  //右侧小三角颜色
+				});
+				$('#consumeSelector').selectlist({
+					zIndex: 11,
+					width: 400,
+					height: 30,
+					showMaxHeight:250,
+					triangleSize: 6,   //右侧小三角大小
+           			triangleColor: '#cd992f'  //右侧小三角颜色
+				});
+			})
+			
+		</script>
+		
+	</body>
+</html>

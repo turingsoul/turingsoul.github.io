@@ -1,0 +1,194 @@
+
+
+
+
+#canv {
+  width: 150%;
+  height: 150%;
+  position:absolute;
+  top:0%;
+  left:10%;
+  transform:translate(-50%,-50);
+  z-index:-1;
+  -webkit-filter:contrast(1) invert(1);
+ 
+}
+#showArea{
+	position:absolute;
+	width:500px;
+	height:100%;
+	text-align: center;
+	margin-left: -250px;
+	left: 50%;
+	top: 0;
+	z-index: 10;
+}
+#showArea h1{
+	text-align: center;
+	width: 500px;
+	margin-top:-1em;
+	font-family: Oswald;
+	color:white;
+	text-shadow:#ccc 2px 2px 2px;
+	font-size: 3em;
+	position: absolute;
+	top:45%;
+	
+	
+}
+#showArea input{
+	width: 200px;
+	outline: none;
+	background:none;
+	border-width: 1px;
+	border-color:rgba(0,0,0,0) rgba(0,0,0,0) rgba(255,255,255,1) rgba(0,0,0,0);
+	color:white;
+}
+
+input#nickname{
+	text-align: center;
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:-100px;
+	margin-top: 100px;
+	letter-spacing: 10px;
+}
+input#password1{
+	text-align: center;
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:-100px;
+	margin-top: 150px;
+	letter-spacing: 10px;
+}
+input#password2{
+	text-align: center;
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:-100px;
+	margin-top: 200px;
+	letter-spacing: 10px;
+}
+input#submit{
+	border:none;
+	background-color:orange;
+	position:absolute;
+	text-align: center;
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:-100px;
+	margin-top: 250px;
+	letter-spacing: 10px;
+	cursor:pointer;
+}
+input#submit:hover{
+	box-shadow: #ccc 0px 0px 3px;
+	
+}
+input#checkpassword{
+	text-align: center;
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:-100px;
+	margin-top: 200px;
+	letter-spacing: 10px;
+}
+input#check{
+	text-align: center;
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:-100px;
+	margin-top: 250px;
+	letter-spacing: 10px;
+	background-color:orange;
+}
+label#tips{
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:60px;
+	margin-top: 200px;
+	padding-top:-1em;
+	color:pink;
+}
+label#nicknametips{
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:60px;
+	margin-top: 100px;
+	padding-top:-1em;
+	color:pink;
+}
+label#passwordtips{
+	position:absolute;
+	display:block;
+	width:200px;
+	top:50%;
+	left:250px;
+	margin-left:90px;
+	margin-top: 200px;
+	padding-top:-1em;
+	color:pink;
+}
+body, html {
+  background-color:#111;
+  overflow:hidden;
+  margin:0 0;
+}
+#c {
+  position:absolute;
+  top: calc(50vh - 200px);
+  left: calc(50vw - 200px);
+}
+#alpha {
+  position:absolute;
+  top: calc(50vh + 220px);
+  left: calc(50vw - 50px);
+  width:100px;
+  height:40px;
+  background-color: #000;
+  border:none;
+  font:20px Verdana;
+  color:white;
+  text-shadow:0 0 2px white;
+  cursor:pointer;
+  
+  transition:.4s;
+}
+#alpha:focus {
+  outline:none;
+}
+#alpha:hover {
+  background-color: #555;
+}
+#overlay {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: calc(50vh - 200px);
+  left: calc(50vw - 200px);
+  background-image: radial-gradient(transparent 20%, #111 69%);
+}

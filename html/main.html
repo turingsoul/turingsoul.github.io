@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				overflow-y: auto;
+				width: 300px;
+				height: 300px;
+				background: red;
+				margin-bottom: 20px;
+			}
+			#first tr td:nth-child(2){            /*将第二列变色*/
+				background:green;
+			}
+			h4{
+				color: white;
+				height: 30px;
+				width: 300px;
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<h4></h4><button id="save">保存</button><button id="read">读取</button><button id="add">添加</button>
+		<div>
+			<table id="first">
+				
+			</table>
+			
+		</div>
+		<div id="second">
+			<table>
+			</table>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+	/*获取收入项*/
+		var $inputItems = $("#first tr td:first-child"); //获取收入项jquerycollection
+		var inputItemsSize = $inputItems.length;         //获取收入项的长度
+		var inputItemsArray = new Array(inputItemsSize); //根据长度新建数组存储输入项
+		for(var i=0;i<inputItemsSize;i++){				 //将collection存到数组
+			inputItemsArray[i] = $($inputItems[i]).text();
+		}
+	/*获取收入项金额*/
+		var $inputPrice = $("#first tr td:nth-child(2)");  //获取收入项金额 jquerycollection
+		var inputPriceSize = $inputPrice.length;           //获取项目金额的个数
+		var inputPriceArray = new Array(inputPriceSize);   //根据长度新建金额数组
+		for(var i=0;i<inputPriceSize;i++){				   //将金额collection存到数组
+			inputPriceArray[i] = $($inputPrice[i]).text();
+		}
+	/*显示总金额数*/
+	getSum1();
+	/*生成收入项内容*/
+	for(var i=0;i<100;i++){
+		$("#second table").append("<tr><td>"+i+"</td></tr>");
+	}
+	/*修改收入项内容*/
+	/*$("#first tr td:nth-child(2)").on("dblclick",function(){
+		var lastContent = $(this).text();
+		$(this).html("<input type='' name='' id='' value="+lastContent+" />");
+		var $parent = $(this);
+		$(this).children().focus();
+		$(this).children().on("blur",function(){
+			var inputContent = $(this).val(); //获取input的值
+			if(isNaN(inputContent)){          //判断是否为非数字
+				 alert("不是数字");                 //不是数字
+				 $(this).focus();                  //不是数字要一直重新输入
+			}
+			else{
+				$parent.text(inputContent);       //如果是数字就继续
+			}
+			getSum1();    //每次修改重新计算
+		})
+	})*/
+	function editCurrentPrice(e){
+		var lastContent = $(e).text();
+		$(e).html("<input type='' name='' id='' value="+lastContent+">");
+		var $parent = $(e);
+		$(e).children().focus();
+		$(e).children().on("blur",function(){
+			var inputContent = $(this).val(); //获取input的值
+			if(isNaN(inputContent)){          //判断是否为非数字
+				 alert("不是数字");                 //不是数字
+				 $(this).focus();                  //不是数字要一直重新输入
+			}
+			else if(inputContent==""){
+				alert("不能为空");
+				$(this).focus();
+			}
+			else{
+				$parent.text(inputContent);       //如果是数字就继续
+			}
+			getSum1();    //每次修改重新计算
+		})
+	}
+	/*删除选中内容*/
+	/*$("#first tr td:nth-child(3)").on("click",function(){
+		if(confirm("确定删除此条内容")){
+			$(this).parent().remove();
+			getSum1();
+		}
+	});*/
+	function deletetr(e){
+		if(confirm("确定删除此条内容")){
+			var $current = $(e);
+			$current.parent().remove();
+			getSum1();
+		}
+	}
+	/*求和功能*/
+	function getSum1(){
+		var totalnumber = 0;
+		var $inputPrice = $("#first tr td:nth-child(2)");  //获取收入项金额 jquerycollection
+		var inputPriceSize = $inputPrice.length;           //获取项目金额的个数
+		var inputPriceArray = new Array(inputPriceSize);   //根据长度新建金额数组
+		for(var i=0;i<inputPriceSize;i++){				   //将金额collection存到数组
+			inputPriceArray[i] = $($inputPrice[i]).text();
+		}
+		for(var i=0;i<inputPriceSize;i++){				   //将金额collection存到数组
+			totalnumber += parseInt(inputPriceArray[i]);
+		}
+		if(!totalnumber){
+			totalnumber=0;
+		}
+		$("h4").text(totalnumber);
+	}
+	/*
+	 * * * * *                               * * * * * * * * * * * * * 
+	 * * * * *          *  *   *  *          * * * * * * * * * * * * * 
+	 * * * * *           *       *           * * * * * * * ** * * * * 
+	 * * * * *             * * *             * * * * * * * * ** * * * 
+	 * 将内容存储到本地*/
+	 function initDatabase() {
+            var db = getCurrentDb();//初始化数据库
+            if(!db) {alert("您的浏览器不支持HTML5本地数据库");return;}
+            db.transaction(function (trans) {//启动一个事务，并设置回调函数
+                //执行创建表的Sql脚本
+                trans.executeSql("create table if not exists inputTable(Itemname text null,itemprice text null)", [], function (trans, result) {
+                }, function (trans, message) {//消息的回调函数alert(message);});
+            }, function (trans, result) {
+            }, function (trans, message) {
+            });
+        });
+      }
+      initDatabase();
+	  function getCurrentDb() {
+            //打开数据库，或者直接连接数据库参数：数据库名称，版本，概述，大小
+            //如果数据库不存在那么创建之
+            var db = openDatabase("richdad", "1.0", "现金流个人管理软件", 1024 * 1024);
+            return db;
+        }
+	 /*
+	  *保存信息到数据库中
+	  *
+	  */
+	$("#save").on("click",function(){
+		var $inputItems = $("#first tr td:first-child"); //获取收入项jquerycollection
+		var inputItemsSize = $inputItems.length;         //获取收入项的长度
+		var inputItemsArray = new Array(inputItemsSize); //根据长度新建数组存储输入项
+		for(var i=0;i<inputItemsSize;i++){				 //将collection存到数组
+			inputItemsArray[i] = $($inputItems[i]).text();
+		}
+	/*获取收入项金额*/
+		var $inputPrice = $("#first tr td:nth-child(2)");  //获取收入项金额 jquerycollection
+		var inputPriceSize = $inputPrice.length;           //获取项目金额的个数
+		var inputPriceArray = new Array(inputPriceSize);   //根据长度新建金额数组
+		for(var i=0;i<inputPriceSize;i++){				   //将金额collection存到数组
+			inputPriceArray[i] = $($inputPrice[i]).text();
+		}
+		 var db = getCurrentDb();
+		 db.transaction(function (trans) {
+		 	trans.executeSql("DELETE FROM inputTable",[],function(ts, data){alert("success");}, function(ts, message){alert(message)});
+		 	for(var i=0;i<inputItemsSize;i++){
+	            trans.executeSql("insert into inputTable(Itemname,itemprice) values(?,?) ", [inputItemsArray[i],inputPriceArray[i]], function (ts, data) {
+    	         }, function (ts, message) {alert(message);});
+            }
+         });
+	});
+	/*
+	 * 
+	 * 读取数据库中的信息
+	 */
+	  function showAllTheData() {
+	  	    
+            $("#first tr").detach();
+            var db = getCurrentDb();
+            db.transaction(function (trans) {
+                trans.executeSql("select * from inputTable ", [], function (ts, data) {
+                	var a  = new Array(data.rows.length);
+                	var b = new Array(data.rows.length);
+                    if (data){
+                        for (var i = 0; i < data.rows.length; i++) {
+                            /*appendDataToTable(data.rows.item(i));//获取某行数据的json对象*/
+                             a[i] = data.rows.item(i).Itemname;
+                             b[i] = data.rows.item(i).itemprice;
+                        }
+                        /*将数据显示出来*/
+                       for(var i=0;i<data.rows.length;i++){
+                       		$("#first").append("<tr><td>"+a[i]+"</td><td ondblclick='editCurrentPrice(this)'>"+b[i]+"</td><td onclick='deletetr(this)'>删除</td></tr>");
+                       }
+                       getSum1();
+                    }
+                    
+                }, function(ts, message) {alert(message);var tst = message;});
+            });
+        }
+	 /*读取数据*/
+	$("#read").on("click",function(){
+		showAllTheData();
+		getSum1();
+	});
+	/*监听添加新数据按钮*/
+	$("#add").on("click",function(){
+		$("#first").append("<tr><td><input id='newaddone' placeholder='项目名称'></td><td><input id='newaddtwo' placeholder='收入'></td><td>删除</td></tr>");
+		$("#newaddone").focus();
+		$("#newaddone").on("blur",function(){
+			var inputContent = $(this).val(); //获取input的值
+			if(inputContent==""){
+				alert("名称不能为空");
+				$(this).focus();
+			}
+			else{
+				$(this).parent().text($(this).val());
+				$(this).remove();
+			}
+		});
+		$("#newaddtwo").on("blur",function(){
+			var inputContent = $(this).val(); //获取input的值
+			if(isNaN(inputContent)){          //判断是否为非数字
+				 alert("不是数字");                 //不是数字
+				 $(this).focus();                  //不是数字要一直重新输入
+			}
+			else if(inputContent==""){
+				alert("不能为空");
+				$(this).focus();
+			}
+			else{
+				$(this).parent().text($(this).val());
+				$(this).remove();
+			}
+			getSum1();    //每次修改重新计算
+		});
+	});
+	
+	
+	</script>
+</html>
