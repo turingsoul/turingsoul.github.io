@@ -84,7 +84,7 @@
 
 
 	// module
-	exports.push([module.id, "\r\n@media only screen and (min-width: 100px) and (max-width: 640px) {\n\tbody{\r\n\t\tbackground:red;\r\n\t}\r\n\timg{\r\n\t\tdisplay:block;\r\n\t\twidth:100%;\r\n\t\theight:90px;\r\n\t\tbackground:url(" + __webpack_require__(4) + ");\r\n\t}\n}\r\n", ""]);
+	exports.push([module.id, "\r\n@media only screen and (min-width: 100px) and (max-width: 640px) {\n\tbody{\r\n\t\tbackground:red;\r\n\t}\r\n\t#bg{\r\n\t\tdisplay:block;\r\n\t\twidth:100%;\r\n\t\theight:90px;\r\n\t\tbackground:url(" + __webpack_require__(4) + ");\r\n\t}\n}\r\n", ""]);
 
 	// exports
 
