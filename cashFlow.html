@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/login.css"/>
+		<title>你的现金流管家</title>
+		<meta id="metaDescription" name="description" content="丰富的可视化报表，科学的统计方式，便捷的操作，你的不二之选" />
+
+	</head>
+	<body>
+		
+		<canvas id=c></canvas>
+		<div id=overlay></div>	
+		<div id="showArea"></div>
+		<!--<canvas></canvas>
+		<canvas id="canv" width="34" height="34">-->
+		<script src="js/effect.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/md5.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/initDatabase.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/html5.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/respond.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			initUserTable();/* init database and user table if not exist then create them*/
+			showAllTheData();
+		</script>
+	</body>
+</html>

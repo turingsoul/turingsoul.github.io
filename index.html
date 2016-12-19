@@ -1,29 +1,83 @@
-<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="css/login.css"/>
-		<title>你的现金流管家</title>
-		<meta id="metaDescription" name="description" content="丰富的可视化报表，科学的统计方式，便捷的操作，你的不二之选" />
-
+		<title>代码科学家高效工具箱</title>
+		<style type="text/css">
+			body,div,ul,li{
+				margin:0px;
+				padding:0px;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;	
+			}
+			body{
+			    background: -moz-radial-gradient(top, #005494 0%, #001526 100%);
+			    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#005494), color-stop(100%,#001526));
+			    background: -webkit-radial-gradient(top, #005494 0%,#001526 100%);
+			    background: -o-radial-gradient(top, #005494 0%,#001526 100%);
+			    background: -ms-radial-gradient(top, #005494 0%,#001526 100%);
+			    background: radial-gradient(to bottom, #005494 0%,#001526 100%);
+			    overflow-y: hidden;
+			}
+			.btn_choose{
+				position: absolute;
+				left:50%;
+				top:50%;
+				margin-left:-600px;
+				margin-top:-50px;
+				width:1200px;
+				height:100px;
+				/*background: #000C18;
+				border:1px solid #00182D;*/
+				list-style: none;
+				border-radius: 10px;
+			}
+			.btn_choose>li{
+				display: inline-block;
+				width:100px;
+				height:100px;
+				box-sizing: border-box;
+				border-right:1px solid #444;
+				border-left:1px solid #888;
+				border-top:1px solid #ccc;
+				border-radius: 10px;
+				background: #000C18;
+			}
+			.btn_choose>li:hover{
+				box-shadow: 0px 0px 20px #0CC4DF;
+				transition-property: box-shadow;
+				transition-duration: 0.1s;
+			}
+			.cashFlowBox>a{
+				position: absolute;
+				display: inline-block;
+				left:10px;
+				top:10px;
+				width:80px;
+				height:80px;
+				background:url(img/cash.png);
+				background-size: cover;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;	
+			}
+		</style>
 	</head>
 	<body>
+		<div class="chooseBox">
+			<ul class="btn_choose">
+				<li class="cashFlowBox"><a href="cashFlow.html" title="现金流管理"></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li
+				><li><a href=""></a></li>
+			</ul>	
+		</div>
 		
-		<canvas id=c></canvas>
-		<div id=overlay></div>	
-		<div id="showArea"></div>
-		<!--<canvas></canvas>
-		<canvas id="canv" width="34" height="34">-->
-		<script src="js/effect.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/md5.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/initDatabase.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/html5.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/respond.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			initUserTable();/* init database and user table if not exist then create them*/
-			showAllTheData();
-		</script>
 	</body>
 </html>
