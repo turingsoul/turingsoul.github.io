@@ -37,13 +37,20 @@
 				height:100px;
 				box-sizing: border-box;
 				border-right:1px solid #444;
-				border-left:1px solid #888;
+				border-left:1px solid #666;
 				border-top:1px solid #ccc;
 				border-radius: 10px;
 				background: #000C18;
+				background: -moz-radial-gradient(top, #112F47 0%, #000C18 100%);
+			    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#112F47), color-stop(100%,#000C18));
+			    background: -webkit-radial-gradient(top, #112F47 0%,#000C18 100%);
+			    background: -o-radial-gradient(top, #112F47 0%,#000C18 100%);
+			    background: -ms-radial-gradient(top, #112F47 0%,#000C18 100%);
+			    background: radial-gradient(to bottom, #112F47 0%,#000C18 100%);
+			    
 			}
 			.btn_choose>li:hover{
-				box-shadow: 0px 0px 20px #0CC4DF;
+				box-shadow: 0px 0px 30px #0CC4DF;
 				transition-property: box-shadow;
 				transition-duration: 0.1s;
 			}
