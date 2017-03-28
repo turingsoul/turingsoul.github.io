@@ -1,0 +1,29 @@
+.buttonGroup{
+	position: absolute;
+	top: 20px;
+	right:20px;	
+}
+.buttonGroup select{
+	margin-left:10px;
+	display: inline-block;
+	width: 90px;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 10px;
+}
+.buttonGroup input{
+	margin-left:10px;
+	display: inline-block;
+	width:60px;
+	height: 30px;
+	line-height: 30px;
+	background:steelblue;
+	border:none;
+	outline: none;
+	color: white;
+	cursor: pointer;
+}
+.buttonGroup input:hover{
+	background: #318fdd;
+}
+

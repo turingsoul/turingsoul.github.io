@@ -1,0 +1,325 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<title>点标记</title>
+		<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+		<link rel="stylesheet" type="text/css" href="css/button.css"/>
+		<style>
+			.marker {
+				color: #ff6600;
+				padding: 4px 10px;
+				border: 1px solid #fff;
+				white-space: nowrap;
+				font-size: 12px;
+				font-family: "";
+				background-color: #0066ff;
+			}
+		</style>
+		<script src="http://webapi.amap.com/maps?v=1.3&key=您申请的key值"></script>
+		<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+	</head>
+
+	<body>
+		<div id="container"></div>
+		<div class="buttonGroup">
+			<select id="category" name="商店类型">
+				<option value="便利店">便利店</option>
+				<option value="超市">超市</option>
+				<option value="大卖场">大卖场</option>
+				<option value="连锁超市">连锁超市</option>
+				<option value="烟酒">烟酒</option>
+				<option value="海鲜酒楼">海鲜酒楼</option>
+				<option value="中餐厅">中餐厅</option>
+				<option value="综合酒楼">综合酒楼</option>
+				<option value="火锅店">火锅店</option>
+				<
+			</select>
+			<select id="area" name="地区">
+				<option value="巴南区">巴南区</option>
+				<option value="北碚区">北碚区</option>
+				<option value="大渡口区">大渡口区</option>
+				<option value="江北区">江北区</option>
+				<option value="九龙坡区">九龙坡区</option>
+				<option value="南岸区">南岸区</option>
+				<option value="沙坪坝区">沙坪坝区</option>
+				<option value="渝北区">渝北区</option>
+				<option value="渝中区">渝中区</option>
+			</select>
+			<input type="button" class="button" value="查询" id="searchData" />
+			
+		</div>
+		<script>
+			var marker, map = new AMap.Map("container", {
+				resizeEnable: true,
+				center: [106.567823, 29.480756],
+				zoom: 13
+			});
+			var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+			function markerClick(e) {
+        infoWindow.setContent(e.target.content);
+        infoWindow.open(map, e.target.getPosition());
+}
+			function markerOut(e) {
+        infoWindow.setContent(e.target.content);
+        infoWindow.close(map, e.target.getPosition());
+}
+			/***********************************************************************************/
+			
+			/*****************************【点击查询按钮=》获取查询的拼接内容】*****************************/
+			
+			/***********************************************************************************/
+			function searchContent(){
+				/*获取列表1内容*/
+				var category = document.querySelector("#category").value;
+				/*内容英文转换*/
+				switch(category){
+					case "便利店": category = "store";break;
+					case "超市": category = "supermarket";break;
+					case "大卖场": category = "hypermarket";break;
+					case "连锁超市": category = "chainmarket";break;
+					case "烟酒": category = "grocery";break;
+					case"地方菜系":category="difangcaixi";break;
+					case"海鲜酒楼":category="haixianjiulou";break;
+					case"火锅店":category="huoguo";break;
+					case"中餐厅":category="zhongcanting";break;
+					case"综合酒楼":category="zonghejiulou";break;
+				}
+				/*获取列表2内容*/
+				var area = document.querySelector("#area").value;
+				/*内容英文切换*/
+				switch(area){
+					case "巴南区": area = "banan";break;
+					case "北碚区": area = "beibei";break;
+					case "大渡口区": area = "dadukou";break;
+					case "江北区": area = "jiangbei";break;
+					case "九龙坡区": area = "jiulongpo";break;
+					case "南岸区": area = "nanan";break;
+					case "沙坪坝区": area = "shapingba";break;
+					case "渝北区": area = "yubei";break;
+					case "渝中区": area = "yuzhong";break;
+				}
+				/*存储返回数据*/
+				var tempArray  = [];
+				tempArray.push(category);
+				tempArray.push(area);
+				console.log(tempArray.join("_"));
+				/*后续操作*/
+				showMyPoint(tempArray.join("_"));
+				/*返回拼接数据*/
+				return tempArray.join("_");
+			}
+			/***********************************************************************************/
+			
+			/*****************************获取数据并生成数组*******************************/
+			
+			/***********************************************************************************/
+			function moveScreenCenter(name){
+				/*alert(eval(name+""));*/
+			}
+			/***********************************************************************************/
+			
+			/*****************************显示获取数据的点*******************************/
+			
+			/***********************************************************************************/
+			var markers = [];
+			function showMyPoint(name){
+				map.remove(markers);
+				var pointSet =  eval(name+"");
+				
+				console.log("marker");
+				console.log(markers);
+				/*var center = [106.567823,29.480756];
+				map.setCenter(center);*/
+				/*循环*/
+				for(num in pointSet.RECORDS){
+					if(pointSet.RECORDS[num].typecode[1]==6){
+//					console.log(pointSet.RECORDS[num]);
+					var newMarker  = new AMap.Marker({ 
+						map: map,
+						icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+						/*icon:"http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png",*/
+						/*icon: "http://i4.buimg.com/1949/1a6123f56ff7cb7b.png",*/
+						position: [parseFloat(pointSet.RECORDS[num].location.split(",")[0]), parseFloat(pointSet.RECORDS[num].location.split(",")[1])]
+			
+					});
+					newMarker.setMap(map);
+        			newMarker.content =pointSet.RECORDS[num].name+"<br>"+pointSet.RECORDS[num].address+"<br>"+pointSet.RECORDS[num].tel;
+        			newMarker.on('mouseover', markerClick);
+        			newMarker.on('mouseout',markerOut);
+					markers.push(newMarker);
+					
+				}
+					if(pointSet.RECORDS[num].typecode[1]==5){
+						var newMarker  = new AMap.Marker({ 
+						map: map,
+						icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png",
+						/*icon: "http://i2.muimg.com/1949/0c778af4f820d7ad.png",*/
+						position: [parseFloat(pointSet.RECORDS[num].location.split(",")[0]), parseFloat(pointSet.RECORDS[num].location.split(",")[1])]
+			
+					});
+					newMarker.setMap(map);
+        			newMarker.content =pointSet.RECORDS[num].name+"<br>"+pointSet.RECORDS[num].address+"<br>"+pointSet.RECORDS[num].tel+"<br>"+pointSet.RECORDS[num].avg_price_type;
+        			newMarker.on('mouseover', markerClick);
+        			newMarker.on('mouseout',markerOut);
+					markers.push(newMarker);
+					}
+				}
+				map.setCenter([parseFloat(pointSet.RECORDS[num].location.split(",")[0]), parseFloat(pointSet.RECORDS[num].location.split(",")[1])]);
+				map.setZoom(10);
+				/*中心点*/
+				
+				
+			}
+			/*监听查询按钮*/
+			AMap.event.addDomListener(document.getElementById('searchData'), 'click', function() {
+				searchContent();
+				
+			}, false);
+			
+			
+			
+			/*AMap.event.addDomListener(document.getElementById('addMarker'), 'click', function() {
+				addMarker();
+			}, false);*/
+
+			/*var json1 = [{ x: 116.405467, y: 39.907761 }, { x: 116.415467, y: 39.907761 }, { x: 116.425467, y: 39.907761 }, { x: 116.435467, y: 39.917761 }, { x: 116.435467, y: 39.907761 }, { x: 116.455467, y: 39.907761 }];
+
+			function strToJson(str) {
+				var json = (new Function("return " + str))();
+				return json;
+			}*/
+
+			/*生成1万个点*/
+		/*	var json = [];
+			for(var i = 0; i < 1000; i++) {
+				var point = "{'x':" + (116.4 + Math.random() / 10 + Math.random() - Math.random()) + ",'y':" + (39.9 + Math.random() / 10 + Math.random() - Math.random()) + "}";
+				point = strToJson(point);
+				json.push(point);
+			}*/
+
+			// 实例化点标记
+			/*function addMarker() {
+				var potLength = json.length;
+				for(var i = 0; i < potLength; i++) {
+					new AMap.Marker({
+						icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+						position: [json[i].x, json[i].y]
+					}).setMap(map);
+				}
+			}*/
+
+			/*function updateMarker() {
+				// 自定义点标记内容
+				var markerContent = document.createElement("div");
+				// 点标记中的图标
+				var markerImg = document.createElement("img");
+				markerImg.className = "markerlnglat";
+				markerImg.src = "http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png";
+				markerContent.appendChild(markerImg);
+				// 点标记中的文本
+				var markerSpan = document.createElement("span");
+				markerSpan.className = 'marker';
+				markerSpan.innerHTML = "Hi，我换新装备啦！";
+				markerContent.appendChild(markerSpan);
+				marker.setContent(markerContent); //更新点标记内容
+				marker.setPosition([116.391467, 39.927761]); //更新点标记位置
+			}*/
+		</script>
+		<script src="js/store_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/store_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/store_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/store_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/store_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/store_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/store_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/store_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/store_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/supermarket_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/hypermarket_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chainmarket_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/grocery_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/difangcaixi_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhogncanting_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhongcanting_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhongcanting_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhongcanting_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhongcanting_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhongcanting_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhongcanting_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhongcanting_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zhongcanting_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/huoguo_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/zonghejiulou_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_banan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_beibei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_nanan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_dadukou.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_yuzhong.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_jiangbei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_yubei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_shapingba.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/haixianjiulou_jiulongpo.js" type="text/javascript" charset="utf-8"></script>
+		
+	</body>
+
+</html>
